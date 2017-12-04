@@ -1,0 +1,68 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Requested Item #1:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select4" label="Requested Item #2:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select5" label="Requested Item #3:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+        
+           	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+ 			<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+</aura:component>

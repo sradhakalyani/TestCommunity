@@ -1,0 +1,1475 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute type="string" name="stage" default="1"/>
+    <aura:attribute type="string" name="popupcnt" default="0"/>
+    <aura:attribute name="today" type="Date" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="items1" type="Object"/> 
+    <aura:attribute name="items2" type="Object"/>
+    <aura:attribute name="items3" type="Object"/>
+    <aura:attribute name="items4" type="Object"/>
+	<aura:attribute name="ckboxoptions1" type="List" default="[
+    {'label': 'Spray bottle broken', 'value': 'option1'},
+    {'label': 'Oil bottle broken', 'value': 'option2'},
+	{'label': 'Floor Scrapper Missing', 'value': 'option3'},
+	{'label': 'Floor Scrapper Missing', 'value': 'option4'},
+	{'label': 'Mirror broken', 'value': 'option5'},
+	{'label': 'Drawer handles broken', 'value': 'option6'},
+	{'label': 'Door falling off hinges', 'value': 'option7'},
+	{'label': 'Wax machine broken', 'value': 'option8'},
+	{'label': 'Bed paper holder broken', 'value': 'option9'},                                                             
+    ]"/>
+    <aura:attribute name="value1" type="List" default="option1"/>
+	<aura:attribute name="ckboxoptions2" type="List" default="[
+    {'label': 'Scissors', 'value': 'option1'},
+    {'label': 'Stapler', 'value': 'option2'},
+	{'label': 'Staples', 'value': 'option3'},
+	{'label': 'Staple remover', 'value': 'option4'},
+	{'label': 'Paper Clips', 'value': 'option5'},
+	{'label': 'Pens', 'value': 'option6'},
+	{'label': 'Printer paper', 'value': 'option7'},
+	{'label': 'Register tape', 'value': 'option8'},
+	{'label': 'Tape', 'value': 'option9'},                                                             
+    ]"/>
+   	<aura:attribute name="value2" type="List" default="option1"/>
+    
+    <aura:attribute name="radiobtnoptions1" type="List" default="[
+    {'label': 'Light bulbs', 'value': 'option1'},
+    {'label': 'Toilet', 'value': 'option2'},
+	{'label': 'Sink', 'value': 'option3'},
+	{'label': 'Windows', 'value': 'option4'},
+	{'label': 'Air Conditioner', 'value': 'option5'},
+	{'label': 'Computer', 'value': 'option6'},
+	{'label': 'Printer', 'value': 'option7'},
+	{'label': 'Alarm', 'value': 'option8'},
+	{'label': 'Safe', 'value': 'option9'},
+	{'label': 'Other', 'value': 'option10'},                                                                 
+    ]"/>
+    <aura:attribute name="value3" type="String" default="option1"/>
+    <style>
+    	@media only screen and (max-width: 320px) 
+        {
+        	.resp-heading{font-size:16px;}
+        }
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  {
+        	.ipad-height{top:-200px;}
+        }
+    </style>
+    <div class="slds-modal__content slds-app-launcher__content bg-img slds-large-size_4-of-4 slds-medium-size_1-of-1">
+        <div class="{! v.stage == '1'?'slds-show':'slds-hide'}">
+        	<div class="slds-p-around_x-small" style="font-size: 13px;background: rgb(255, 14, 73);color: white;">DAILY OPS</div>
+        	<div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+					<lightning:icon iconName="custom:custom18" size="small"/>
+                 	&nbsp;&nbsp;FORMS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small"/>
+                	&nbsp;&nbsp;DISTRIBUTION CENTERS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:report" size="small"/>
+                	&nbsp;&nbsp;REPORTS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:marketing_actions" size="small"/>
+                	&nbsp;&nbsp;MARKETING
+                </div>
+                <div onclick="{!c.openBusinessSupport}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:service_crew" size="small"/>
+                	&nbsp;&nbsp;BUSINESS SUPPORT
+                </div>
+				<div onclick="{!c.openOnlineForms}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom18" size="small"/>
+                    &nbsp;&nbsp;ONLINE FORMS
+                </div>
+            </div>
+        </div>
+        <div class="{! v.stage == '2'?'slds-show':'slds-hide'}">
+        	<div class="slds-p-around_x-small" style="font-size: 13px;background: rgb(255, 14, 73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > BUSINESS SUPPORT</div>
+        	<div>
+            	<div onclick="{!c.openCreateSupportTickets}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom18" size="small" />
+                    &nbsp;&nbsp;CREATE SUPPORT TICKETS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small" />
+                	&nbsp;&nbsp;MANAGE SUPPORT TICKETS
+                </div>
+                <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                    <button onclick="{!c.openDailyOps}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+                </div>
+            </div>
+        </div>
+		<div class="{! v.stage == '22'?'slds-show':'slds-hide'}">
+        	<div class="slds-p-around_x-small" style="font-size: 13px;background: rgb(255, 14, 73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > ONLINE FORMS</div>
+        	<div>
+            	<div onclick="{!c.openDailyOperations}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom18" size="small" />
+                    &nbsp;&nbsp;DAILY OPS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small" />
+                	&nbsp;&nbsp;NOTIFY MY DESIGNATED MANAGER
+                </div>
+				<div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small" />
+                	&nbsp;&nbsp;NOTIFY MY CENTERS UPPER MANAGEMENT
+                </div>
+                <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                    <button onclick="{!c.openDailyOps}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+                </div>
+            </div>
+        </div>
+        <div class="{! v.stage == '3'?'slds-show':'slds-hide'}">
+        	<div class="slds-p-around_x-small" style="font-size: 13px;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openBusinessSupport}">BUSINESS SUPPORT</span> > CREATE SUPPORT TICKETS</div>
+        	<div>
+            	<div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom18" size="small" />
+                    &nbsp;&nbsp;GUEST RESERVATION ISSUES
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small" />
+                	&nbsp;&nbsp;LOG ME IN ISSUES 
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:report" size="small" />
+                    &nbsp;&nbsp;ACCOUNTING TICKETS
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:marketing_actions" size="small" />
+                	&nbsp;&nbsp;TIME CLOCK ISSUES
+                </div>
+                <div onclick="{!c.openSoftwareAndHardware}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<div style="float:left;width:35px;margin-top:7px;">
+                    	<lightning:icon iconName="standard:service_crew" size="small" />
+                	</div>
+                    <div style="float:left;width: 200px;">
+                        SOFTWARE AND HARDWARE ISSUES
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                    <button onclick="{!c.openBusinessSupport}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+                </div>
+            </div>
+        </div>
+		<div class="{! v.stage == '32'?'slds-show':'slds-hide'}">
+        	<div class="slds-p-around_x-small" style="font-size: 13px;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openOnlineForms}">ONLINE FORMS</span> >DAILY OPS</div>
+        	<div>
+				<div onclick="{!c.openLocationProcedures}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+					<lightning:icon iconName="standard:service_crew" size="small" />
+					&nbsp;&nbsp;LOCATION PROCEDURES
+                </div>
+				<div onclick="{!c.openScrubOrderForm}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="custom:custom24" size="small" />
+                	&nbsp;&nbsp;SCRUB ORDER FORM 
+                </div>
+                <div onclick="{!c.openGuestRelatedForm}" class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:report" size="small" />
+                    &nbsp;&nbsp;GUEST RELATED
+                </div>
+                <div class="slds-p-around_x-small bg-white slds-m-around_medium">
+                	<lightning:icon iconName="standard:marketing_actions" size="small" />
+                	&nbsp;&nbsp;REGISTER PROCEDURES
+                </div>
+                <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                    <button onclick="{!c.openOnlineForms}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+                </div>
+            </div>
+        </div>
+        <div class="{! v.stage == '4'?'slds-show':'slds-hide'}">
+            <div style="padding: 1%;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openBusinessSupport}">BUSINESS SUPPORT</span> > <span class="bc-nav" onclick="{!c.openCreateSupportTickets}">CREATE SUPPORT TICKETS</span> > SOFTWARE AND HARDWARE ISSUES</div>
+            <div style="cursor:pointer;border-radius:3px;background:white;margin: 6%;padding:1%;">   
+				<lightning:card iconName="standard:service_crew" title="SOFTWARE AND HARDWARE ISSUES" >
+					<div class="slds-p-top--small slds-p-horizontal_large slds-p-bottom--small">
+                    	<p style="color:rgb(255, 14, 73);">Click one of the options listed below </p>
+						<lightning:tree class="issuetree" items="{!v.items1}" onselect="{!c.listSelect}"/>        
+                	</div>
+        		</lightning:card>    
+            </div>
+            <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                <button onclick="{!c.openCreateSupportTickets}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+            </div>
+        </div>
+		<div class="{! v.stage == '42'?'slds-show':'slds-hide'}">
+            <div style="padding: 1%;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openOnlineForms}">ONLINE FORMS</span> > <span class="bc-nav" onclick="{!c.openDailyOperations}">DAILY OPS</span> >LOCATION PROCEDURES</div>
+            <div style="cursor:pointer;border-radius:3px;background:white;margin: 6%;padding:1%;">   
+				<lightning:card iconName="standard:service_crew" title="LOCATION PROCEDURES" >
+					<div class="slds-p-top--small slds-p-horizontal_large slds-p-bottom--small">
+                    	<p style="color:rgb(255, 14, 73);">Click one of the options listed below </p>
+						<lightning:tree class="issuetree" items="{!v.items2}" onselect="{!c.listSelect}"/>        
+                	</div>
+        		</lightning:card>    
+            </div>
+            <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                <button onclick="{!c.openDailyOperations}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+            </div>
+        </div>
+		<div class="{! v.stage == '43'?'slds-show':'slds-hide'}">
+            <div style="padding: 1%;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openOnlineForms}">ONLINE FORMS</span> > <span class="bc-nav" onclick="{!c.openDailyOperations}">DAILY OPS</span> >SCRUB ORDER FORM</div>
+            <div style="cursor:pointer;border-radius:3px;background:white;margin: 6%;padding:1%;">   
+				<lightning:card iconName="standard:service_crew" title="SCRUB ORDER FORM" >
+					<div class="slds-p-top--small slds-p-horizontal_large slds-p-bottom--small">
+                    	<p style="color:rgb(255, 14, 73);">Click one of the options listed below </p>
+						<lightning:tree class="issuetree" items="{!v.items3}" onselect="{!c.listSelect}"/>        
+                	</div>
+        		</lightning:card>    
+            </div>
+            <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                <button onclick="{!c.openDailyOperations}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+            </div>
+        </div>
+		<div class="{! v.stage == '44'?'slds-show':'slds-hide'}">
+            <div style="padding: 1%;background: rgb(255,14,73);color: white;"><span class="bc-nav" onclick="{!c.openDailyOps}">DAILY OPS</span> > <span class="bc-nav" onclick="{!c.openOnlineForms}">ONLINE FORMS</span> > <span class="bc-nav" onclick="{!c.openDailyOperations}">DAILY OPS</span> >GUEST RELATED</div>
+            <div style="cursor:pointer;border-radius:3px;background:white;margin: 6%;padding:1%;">   
+				<lightning:card iconName="standard:service_crew" title="GUEST RELATED" >
+					<div class="slds-p-top--small slds-p-horizontal_large slds-p-bottom--small">
+                    	<p style="color:rgb(255, 14, 73);">Click one of the options listed below </p>
+						<lightning:tree class="issuetree" items="{!v.items4}" onselect="{!c.listSelect}"/>        
+                	</div>
+        		</lightning:card>    
+            </div>
+            <div style="cursor:pointer;border-radius:3px;text-align:center;margin: 2%;padding:1%;">
+                <button onclick="{!c.openDailyOperations}" style="background-color: rgb(255, 14, 73);border-color: #e1004a;" class="slds-button slds-button_brand">BACK</button>
+            </div>
+        </div>
+    </div>
+    <div class="{!v.popupcnt == '1' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">COMPUTERS SERVERS AND WORKSTATIONS ISSUE FORM</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID1" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID1" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+					<lightning:select class="formitem" name="select3" aura:id="fieldID1" label="What computer are you experiencing trouble with?" required="true">
+        				<option value="">select the computer</option>
+        				<option value="1">C1</option>
+        				<option value="2">C2</option>
+        				<option value="3">C3</option>
+        				<option value="4">C4</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" value="Enter the details of the issue" label="Please give a detailed description of the issue you are receiving" />
+    			</lightning:layoutItem>
+           
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+    <div class="{!v.popupcnt == '2' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">INSTALLATION AND UPDATE SOFTWARE REQUEST FORM</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID2" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID2" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+					<lightning:select class="formitem" name="select3" aura:id="fieldID2" label="What computer are you experiencing trouble with?" required="true">
+        				<option value="">select the computer</option>
+        				<option value="1">C1</option>
+        				<option value="2">C2</option>
+        				<option value="3">C3</option>
+        				<option value="4">C4</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" aura:id="fieldID" value="Enter the details of the issue" label="Please list the website(s) that you need access to in order to install or update your software." required="true" />
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" value="Comments" label="Comments" />
+    			</lightning:layoutItem>           
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+  	</div>
+    <div class="{!v.popupcnt == '3' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - PAGERS ISSUE FORM</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID3" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID3" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+					<lightning:select class="formitem" name="ckbox" label="By Submitting this form you are confirming that your pagers are not working properly. You will recieve notification once the issue has been resolved.">
+        				<option value="1">YES</option>
+        				<option value="2">NO</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+                <lightning:layoutItem >
+                	<lightning:input type="toggle" label="By Submitting this form you are confirming that your pagers are not working properly. You will recieve notification once the issue has been resolved." name="togglevalue" checked="true" />
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" value="Comments" label="Comments" />
+    			</lightning:layoutItem>           
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+    <div class="{!v.popupcnt == '4' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+ 		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - PRINTERS ISSUE FORM</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID4" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID4" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+					<lightning:select class="formitem" name="select3" aura:id="fieldID4" label="Which Printer are you having trouble with?" required="true">
+        				<option value="">select the computer</option>
+        				<option value="1">Counter1 Receipt Printer</option>
+        				<option value="2">Counter2 Receipt Printer</option>
+        				<option value="3">Report Printer</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" aura:id="fieldID4" value="Enter the details of the issue" label="Please give a detailed description of the problem you are experiencing." required="true" />
+    			</lightning:layoutItem>      
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '5' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - SONIC WALL(Replacing Sonic Wall router)</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID5" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID5" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+					<lightning:select class="formitem" name="ckbox" label="By Submitting this form you are confirming that your pagers are not working properly. You will recieve notification once the issue has been resolved.">
+        				<option value="1">YES</option>
+        				<option value="2">NO</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="myTextArea" value="Comments" label="Comments" />
+    			</lightning:layoutItem>           
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '6' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - Sonic Wall (Installing a Camera System)</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID6" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" aura:id="fieldID6" name="ipaddr" label="IP Address:" required="true" />
+				</lightning:layoutItem>        
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '7' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - Sonic Wall is blocking certain websites</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID7" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID7" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" aura:id="fieldID7" name="urltext" label="Please copy and paste the URL that you would like included in your sonic wall" required="true" />
+				</lightning:layoutItem>  
+                <lightning:layoutItem >
+    				<lightning:textarea class="formitem" name="comments" value="Comments" label="Comments" />
+    			</lightning:layoutItem>  
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '8' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - COMPUTER</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID8" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID8" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID8" name="select3" label="What computer are you having trouble with?" required="true">
+        				<option value="">Choose One</option>
+        				<option value="1">Counter1</option>
+        				<option value="2">Counter2</option>
+        				<option value="3">Wax Station</option>
+        				<option value="4">Office</option>
+                        <option value="5">Other</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="details" label="Please give a detailed description of the problem you are experiencing"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+    	<div class="{!v.popupcnt == '9' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - LOGITEC WEBCAM</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID9" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID9" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+					<lightning:textarea class="formitem" aura:id="fieldID9" name="wsdetail" label="Which Workstation is your Webcam Connected to:" required="true" />
+    			</lightning:layoutItem>
+                <lightning:layoutItem >
+					<lightning:textarea class="formitem" aura:id="fieldID9" name="wcdetail" label="What Model Webcam are you using:" required="true" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="details" label="Please give a detailed description of the problem you are experiencing"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '10' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">HARDWARE - CREDIT CARD READERS</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Franchisee Name" label="Franchisee Name" value="EWC Franchisee Name"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID10" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID10" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID10" name="select3" label="Which credit card reader are you having trouble with?" required="true">
+        				<option value="">Choose One</option>
+        				<option value="1">Counter1</option>
+        				<option value="2">Counter2</option>
+                        <option value="3">Other</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="details" label="Please give a detailed description of the problem you are experiencing"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '11' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Wax Room Check-In Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID11" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID11" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID11" name="select3" label="Room Number" required="true">
+        				<option value="">Choose One</option>
+        				<option value="1">Room1</option>
+        				<option value="2">Room2</option>
+                        <option value="3">Room3</option>
+                        <option value="4">Room4</option>
+                        <option value="5">Room5</option>
+                        <option value="6">Room6</option>
+                        <option value="7">Room7</option>
+                        <option value="8">Room8</option>
+                        <option value="9">Room9</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+        			<lightning:select class="formitem" name="select4" label="When I arrived, the room was:">
+        				<option value="">Choose One</option>
+        				<option value="1">Perfectly Clean</option>
+        				<option value="2">Clean</option>
+                        <option value="3">Not Clean</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '12' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Waxer Supplies Request Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID12" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID12" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID12" name="select3" label="Room Number" required="true">
+        				<option value="">Choose One</option>
+        				<option value="1">Room1</option>
+        				<option value="2">Room2</option>
+                        <option value="3">Room3</option>
+                        <option value="4">Room4</option>
+                        <option value="5">Room5</option>
+                        <option value="6">Room6</option>
+                        <option value="7">Room7</option>
+                        <option value="8">Room8</option>
+                        <option value="9">Room9</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:checkboxGroup class="formitem" name="chkboxgrp1" label="Items Needed" options="{!v.ckboxoptions1}" value="{!v.value1}" />	
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '13' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Wax Room Check-Out Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID13" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID13" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+        			<lightning:select class="formitem" name="select3" label="Room Number" >
+        				<option value="">Choose One</option>
+        				<option value="1">Room1</option>
+        				<option value="2">Room2</option>
+                        <option value="3">Room3</option>
+                        <option value="4">Room4</option>
+                        <option value="5">Room5</option>
+                        <option value="6">Room6</option>
+                        <option value="7">Room7</option>
+                        <option value="8">Room8</option>
+                        <option value="9">Room9</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+        			<lightning:select class="formitem" name="select4" label="Room was left">
+        				<option value="">Choose One</option>
+        				<option value="1">Perfectly Clean</option>
+        				<option value="2">Clean</option>
+                        <option value="3">Not Clean</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '14' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Reception Supplies Request Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID14" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID14" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:checkboxGroup class="formitem" name="chkboxgrp2" label="Items Needed" options="{!v.ckboxoptions2}" value="{!v.value2}" />	
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '15' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Reservation Center Supply Request Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID15" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID15" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Requested Item #1:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select4" label="Requested Item #2:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select5" label="Requested Item #3:">
+        				<option value="">select the item</option>
+        				<option value="1">Notepad</option>
+        				<option value="2">Brochure</option>
+        				<option value="3">Pens</option>
+        				<option value="4">Tissues</option>
+                        <option value="5">Sticky Notes</option>
+                        <option value="5">Keyboard Cleaner</option>
+                        <option value="6">Disinfecting wipes</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '16' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - In Store Delivery Notification Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID16" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID16" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text1" label="Time of Delivery:"/>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text2" label="Where did the package come from:"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text3" label="What was delivered:"/>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text4" label="How many items were delivered:"/>
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="comments" label="Comments"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '17' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">LOCATION PROCEDURES - Location Maintenance Request Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID17" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID17" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:radioGroup name="radioButtonGroup" label="Maintenance request for" options="{!v.radiobtnoptions1}" value="{!v.value3}" />
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text2" label="Please provide a detailed description of the problem:"/>
+				</lightning:layoutItem>    
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '18' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">Instructions for Completing the Online Scrub Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+                    <lightning:formattedUrl value="intranet.waxcenter.com/product_images/Instructions_For_Completing_The_Online_Scrub_Order_Form_1323.pdf" />
+  				</lightning:layoutItem>
+			</div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '19' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">Link to Online Scrub Order Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+                    <lightning:formattedUrl value="ewc.claytonkendall.com/login.php" />
+  				</lightning:layoutItem>
+			</div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+    <div class="{!v.popupcnt == '20' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">Associate Postdate Wax Pass Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID20" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID20" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text1" label="Guest First Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text2" label="Guest Last Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="tel" label="Guest Phone Number" name="tel" value="343-343-3434" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+				</lightning:layoutItem> 
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text4" label="Location Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input type="date" label="Date the Current Wax Pass Expires" name="date" />
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text6" label="Comments"/>
+				</lightning:layoutItem>
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '21' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">Request to Change a Wax Pass or Payment Plan</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID21" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID21" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text1" label="Guest First Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text2" label="Guest Last Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="tel" label="Guest Phone Number" name="tel" value="343-343-3434" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+                	<lightning:input type="email" label="Guest Email" name="email" value="abc@domain.com" />
+                </lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text3" label="Guest's Location"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text4" label="What is the best way to contact guest:"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Request Type">
+        				<option value="">choose one option</option>
+        				<option value="1">Wax Pass Cancellation Request</option>
+        				<option value="2">Wax Pass Transfer Request</option>
+        				<option value="3">Payment Plan Past Due</option>
+        				<option value="4">Change Payment Plan Due Date</option>
+                        <option value="5">Payment Plan Billing Question</option>
+                        <option value="6">Other</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:textarea class="formitem" name="text5" label="Please describe the request below:"/>
+				</lightning:layoutItem>
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '22' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">GUEST PROFILE ISSUES - GND (Guest not in database) Form</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID22" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID22" name="select2" label="Please Select Your Location Center" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text1" label="New Guest Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="tel" label="New Guest Phone Number" name="tel" value="343-343-3434" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text2" label="Location of New Guest:"/>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text3" label="Referral Name Given"/>
+				</lightning:layoutItem>
+                <lightning:layoutItem >
+                    <lightning:input type="date" label="Date of New Guests Visit:" name="date" />
+                </lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:input type="toggle" label="Did you try to Globalize the Referral's Name?:" name="togglevalue" checked="false" />
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:input type="toggle" label="Did you try to search using referral's phone number?:" name="togglevalue" checked="false" />
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Did you try searching">
+        				<option value="1">YES</option>
+        				<option value="2">NO</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="text5" label="Comments"/>
+				</lightning:layoutItem>
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+	<div class="{!v.popupcnt == '23' ? 'slds-show' : 'slds-hide'}" style="height: 640px;">
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container ipad-height">
+                <header class="slds-modal__header" style="background: rgb(255, 14, 73);color: #FFFFFF;padding: 1rem">
+                    <button style="top: -2rem;font-size: 20px;" class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.cancel}">X</button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium">GUEST PROFILE ISSUES - Points Issue</h2>
+                </header>
+			<div class="slds-modal__content slds-p-around_medium">
+    			<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name1"/> 
+  				</lightning:layoutItem>
+    			<lightning:layoutItem >
+                    <lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    			</lightning:layoutItem>
+    			<lightning:layoutItem >
+        			<lightning:select class="formitem" aura:id="fieldID23" name="select1" label="Best Way to Reach you" required="true">
+        				<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID23" name="select2" label="Location Name (where the issue occurred):" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text1" label="Guest First Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text2" label="Guest Last Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="tel" label="Guest Phone Number" name="tel" value="343-343-3434" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Problem Description:">
+                        <option value="">Choose one</option>
+        				<option value="1">Missing Referral Points</option>
+        				<option value="2">Missing Pre-Booking Points</option>
+						<option value="3">Offsite Points Aren't Transferring</option>
+						<option value="4">Points Usage Question</option>
+						<option value="5">Other</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select4" label="Did you try to Globalize the Referral's Name?:">
+                        <option value="">Choose one</option>
+        				<option value="1">YES</option>
+        				<option value="2">NO</option>
+                        <option value="3">N/A</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="textarea1" label="Enter referral's phone number/email and/or address:"/>
+				</lightning:layoutItem>
+            </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button class="formbutton" variant="neutral" name="{!v.popupcnt}" label="SUBMIT" onclick="{!c.save}"/>
+                    <lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.cancel}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" style="background-size:cover;background-image: url('http://www.waxcenter.com/images/background-reservation.jpg')"></div>
+    </div>
+</aura:component>

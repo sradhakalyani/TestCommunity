@@ -1,0 +1,74 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+	<aura:attribute name="today" type="Date" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+			<lightning:layoutItem >
+				<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  			</lightning:layoutItem>
+    		<lightning:layoutItem >
+				<lightning:formattedDateTime class="formitem" value="{!v.today}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" timeZoneName="short" />
+    		</lightning:layoutItem>
+			<lightning:layoutItem >
+				<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+						<option value="">select one option</option>
+        				<option value="1">Home Phone</option>
+        				<option value="2">Mobile Phone</option>
+        				<option value="3">Work Phone</option>
+        				<option value="4">Email</option>
+    				</lightning:select>
+    			</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" aura:id="fieldID" name="select2" label="Location Name (where the issue occurred):" required="true">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text1" label="Guest First Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="text" name="text2" label="Guest Last Name"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="tel" label="Guest Phone Number" name="tel" value="343-343-3434" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+				</lightning:layoutItem>
+				<lightning:layoutItem >
+    				<lightning:select class="formitem" name="select3" label="Guest Location:">
+        				<option value="">select the center</option>
+        				<option value="1">Center1</option>
+        				<option value="2">Center2</option>
+        				<option value="3">Center3</option>
+        				<option value="4">Center4</option>
+    				</lightning:select>
+				</lightning:layoutItem>
+    
+				<lightning:layoutItem >
+					<lightning:input class="formitem" type="number" name="number" label="How Many Duplicate Profiles Does the Guest Have?"/>
+				</lightning:layoutItem>
+    
+				<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="textarea1" label="Name and Address of Profile 1:"/>
+				</lightning:layoutItem>
+    
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="textarea2" label="Name and Address of Profile 2:"/>
+				</lightning:layoutItem>
+    
+    			<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="textarea3" label="Name and Address of Profile 3:"/>
+				</lightning:layoutItem>
+
+				<lightning:layoutItem >
+                    <lightning:textarea class="formitem" name="textarea4" label="Comments"/>
+				</lightning:layoutItem>
+    
+        
+    <lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+	<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+	
+	
+</aura:component>
