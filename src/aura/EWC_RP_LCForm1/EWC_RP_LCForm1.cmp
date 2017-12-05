@@ -1,0 +1,69 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:outputfield class="formitem" type="date" value="{!v.today}"/>   		
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+				<option value="">select one option</option>
+        			<option value="1">Home Phone</option>
+        			<option value="2">Mobile Phone</option>
+        			<option value="3">Work Phone</option>
+        			<option value="4">Email</option>
+    			</lightning:select>
+    		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" aura:id="fieldID" name="select2" label="This form is being sent from:" required="true">
+        		<option value="">select the center</option>
+        		<option value="1">Center1</option>
+        		<option value="2">Center2</option>
+        		<option value="3">Center3</option>
+        		<option value="4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+		 <lightning:layoutItem>
+    			<lightning:input class="formitem" type="text" name="text1" label="Location Name"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:input class="formitem" type="date" name="date1" label="Purchase Date:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="text1" label="Guest First Name"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="text2" label="Guest Last Name"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="text3" label="List all services that student passes has been purchased for (Ex: wbib, web, etc.):"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:textarea class="formitem" type="textarea1" name="comments" label="Comments" />
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:outputfield class="formitem" type="text" value="Please use the attachment 1 field to upload the guests student ID."/>   		
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+    			<lightning:input class="formitem" type="file" label="Attachment 1" name="file1" multiple="true" accept="image/png, .zip"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    			<lightning:input class="formitem" type="file" label="Attachment 2" name="file2" multiple="true" accept="image/png, .zip"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:input class="formitem" type="url" name="url1" "label="2 Payment Plan Contract" value="http://intranet.waxcenter.com/product_images/280606_Corporate_PricingPlanContracts_2_PP__1__4817.pdf" />
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:input class="formitem" type="url" name="url2" "label="3 Payment Plan Contract" value="http://intranet.waxcenter.com/product_images/280606_Corporate_PricingPlanContracts_3_PP__1___1__3095.pdf" />
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:input class="formitem" type="url" name="url3" "label="4 Payment Plan Contract" value="http://intranet.waxcenter.com/product_images/280606_Corporate_PricingPlanContracts_4_PP__1__4792.pdf" />
+		</lightning:layoutItem>
+    
+        
+    	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+	
+	
+</aura:component>
