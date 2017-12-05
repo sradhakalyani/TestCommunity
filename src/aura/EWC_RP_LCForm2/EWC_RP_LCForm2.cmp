@@ -1,0 +1,73 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+				<option value="">select one option</option>
+        			<option value="1">Home Phone</option>
+        			<option value="2">Mobile Phone</option>
+        			<option value="3">Work Phone</option>
+        			<option value="4">Email</option>
+    			</lightning:select>
+    		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" aura:id="fieldID" name="select2" label="This form is being sent from:" required="true">
+        		<option value="">select the center</option>
+        		<option value="1">Center1</option>
+        		<option value="2">Center2</option>
+        		<option value="3">Center3</option>
+        		<option value="4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:formattedText value="What are you locking in the Starting Cash Box?"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:formattedText value="What are you dropping in the Safe:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:formattedText value="Associate Performance Information:"/>
+			<lightning:formattedText value="Use the MR043 report in Millennium to find your Total Dollar Amount and Total Number of Packages Sold."/>
+			<lightning:input class="formitem"  type="text" name="text1" label="Your Shift Worked"/>
+			<lightning:input class="formitem"  type="text" name="text2" label="Your Total Number of Packages Sold"/>
+			<lightning:input class="formitem"  type="text" name="text3" label="Your Total Dollar Amount in Packages"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:formattedText value="Location Ticket Information:"/>
+			<lightning:formattedText value="Use the MR045 erport in Millennium to find the Total Number of New and Repeat Guests"/>
+			<lightning:input class="formitem"  type="text" name="text1" label="Total Number of New Guests:"/>
+			<lightning:input class="formitem"  type="text" name="text2" label="Total Number of Repeat Guests:"/>
+			<lightning:input class="formitem"  type="text" name="text3" label="Total Tickets:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:formattedText value="Location Performance Information"/>
+			<lightning:formattedText value="Use the Monitoring Station to find the location's Pre-book percentage"/>
+			<lightning:input class="formitem" type="number" name="num1" label="Pre-book%" formatter="percent"/>
+		 	<lightning:formattedText value="Use the MR080 to find the Total Dollar Amount in Packages and Products Sold"/>
+		 	<lightning:input class="formitem" type="number" name="num2" label="Total Dollar Amount in Package Sales"/>
+		 	<lightning:input class="formitem" type="number" name="num3" label="Total Dollar Amount in Product Sales"/>
+		 	<lightning:input class="formitem" type="number" name="num4" label="Total Dollar Amount in Package Sales/Per Ticket:"/>
+		 	<lightning:input class="formitem" type="number" name="num5" label="Total Dollar Amount in Product Sales/Per Ticket:"/>
+		 	<lightning:input class="formitem" type="number" name="num6" label="Total Adjusted Monetary Sales:"/>
+		 	<lightning:input class="formitem" type="number" name="num7" label="Average Ticket:"/>
+    
+    	<lightning:layoutitem>
+    		<lightning:formattedText value="Check one of the following:"/>
+    		<lightning:input type="radio" label="My register is over by:" name="radio1" checked="true" />
+    		<lightning:input type="text" />
+			<lightning:input type="radio" label="My register is short by:" name="radio2" />
+			<lightning:input type="text" />
+			<lightning:input type="radio" label="My register is perfect:" name="radio3" />
+    	</lightning:layoutitem>
+    	
+    	<lightning:layoutItem >
+			<lightning:textarea class="formitem" name="textarea1" label="Additional Notes:"/>
+		</lightning:layoutItem>
+    	
+    	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+	
+	
+</aura:component>
