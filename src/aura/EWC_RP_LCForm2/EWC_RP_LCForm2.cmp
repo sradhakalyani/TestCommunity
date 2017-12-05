@@ -52,6 +52,7 @@
 		 	<lightning:input class="formitem" type="number" name="num5" label="Total Dollar Amount in Product Sales/Per Ticket:"/>
 		 	<lightning:input class="formitem" type="number" name="num6" label="Total Adjusted Monetary Sales:"/>
 		 	<lightning:input class="formitem" type="number" name="num7" label="Average Ticket:"/>
+		 </lightning:layoutItem>
     
     	<lightning:layoutitem>
     		<lightning:formattedText value="Check one of the following:"/>
