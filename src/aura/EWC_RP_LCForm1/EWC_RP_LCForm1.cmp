@@ -40,10 +40,10 @@
 			<lightning:textarea class="formitem" name="comments" label="Comments" />
 		</lightning:layoutItem>
     	<lightning:layoutItem>
-    			<lightning:input class="formitem" type="file" label="Attachment 1" name="file1" multiple="true" accept="image/png, .zip"/>
+    			<lightning:input class="formitem" type="file" label="Attachment 1" name="file1" accept="image/png, .zip"/>
 		</lightning:layoutItem>
 		<lightning:layoutItem>
-    			<lightning:input class="formitem" type="file" label="Attachment 2" name="file2" multiple="true" accept="image/png, .zip"/>
+    			<lightning:input class="formitem" type="file" label="Attachment 2" name="file2" accept="image/png, .zip"/>
 		</lightning:layoutItem>
     
         
