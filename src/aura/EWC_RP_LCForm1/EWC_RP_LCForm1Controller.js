@@ -29,7 +29,7 @@
 	redirect: function(component, event, helper) {
                 var url = window.location.href; 
                 var value = url.substr(0,url.lastIndexOf('/') + 1);
-                value= value+'ewc-dailyops-guestrelated';
+                value= value+'ewc-dailyops-registerprocedures';
                 console.log(value);
                 window.open(value, '_self');
                return false;
