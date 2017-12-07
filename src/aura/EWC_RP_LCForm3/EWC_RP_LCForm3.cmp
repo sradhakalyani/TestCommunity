@@ -97,9 +97,9 @@
                 <td><ui:inputNumber aura:id="t-1" value="0"/></td>
             </tr>
         </table>
+		</div>
 
-
-    	<lightning:layoutItem >
+    	<lightning:layoutItem>
 			<lightning:textarea class="formitem" name="textarea1" label="Additional Notes:"/>
 		</lightning:layoutItem>
     
