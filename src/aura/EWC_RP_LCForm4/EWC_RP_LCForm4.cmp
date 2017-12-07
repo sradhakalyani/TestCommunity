@@ -1,4 +1,4 @@
-<aura:component>
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
 	<div style="background: #f5f5f5;"> 
         <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>Register Shift Change Form</b></div>
 		<lightning:layoutItem >
