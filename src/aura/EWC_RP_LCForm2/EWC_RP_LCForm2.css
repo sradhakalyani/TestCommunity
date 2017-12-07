@@ -2,10 +2,20 @@
    background-color: rgb(255, 14, 73);
     color: #FFFFFF  
 }
-.THIS .slds-form-element__label {
-    margin-top: 20px;
+.THIS .slds-form-element__label {   
     color: #646464;
     font-size: 13px;
     font-weight: 600;
     font-family: "Source Sans Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;    
+}
+
+.THIS .slds-form-element {
+    margin-top: 20px;
+}
+
+.THIS .lh-label{
+    line-height:2.5;
+}
+.THIS .table-1 tr td{
+    padding:5px;
 }
