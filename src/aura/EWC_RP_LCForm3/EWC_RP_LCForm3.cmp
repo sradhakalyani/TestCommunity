@@ -1,10 +1,4 @@
 <aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">  
-	
-   	<aura:attribute name="options" type="List" default="[
-    {'label': 'My register is over by', 'value':''},
-    {'label': 'My register is short by', 'value':''},
-    {'label': 'My register is perfect', 'value':''}
-    ]"/>
     <div style="background: #f5f5f5;"> 
         <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>REGISTER OPENING FORM</b></div>
 		<lightning:layoutItem >

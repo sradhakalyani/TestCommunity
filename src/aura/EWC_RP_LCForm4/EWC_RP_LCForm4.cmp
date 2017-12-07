@@ -1,0 +1,194 @@
+<aura:component>
+	<div style="background: #f5f5f5;"> 
+        <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>Register Shift Change Form</b></div>
+		<lightning:layoutItem >
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+				<option value="">select one option</option>
+        			<option value="1">Home Phone</option>
+        			<option value="2">Mobile Phone</option>
+        			<option value="3">Work Phone</option>
+        			<option value="4">Email</option>
+    			</lightning:select>
+    		</lightning:layoutItem>
+		<lightning:layoutItem >
+    		<lightning:select class="formitem" aura:id="fieldID" name="select2" label="This form is being sent from:" required="true">
+        		<option value="">select the center</option>
+        		<option value="1">Center1</option>
+        		<option value="2">Center2</option>
+        		<option value="3">Center3</option>
+        		<option value="4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+	<div style="margin-top:40px">
+		<lightning:layoutItem >
+			<lightning:formattedText value="Associate Performance Information:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:formattedText value="Use the MR043 report in Millennium to find your Total Dollar Amount and Total Number of Packages Sold."/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text1" label="Your Shift Worked"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text2" label="Your Total Number of Packages Sold"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text3" label="Your Total Dollar Amount in Packages"/>
+		</lightning:layoutItem>
+	</div>
+    <div style="margin-top:40px">
+		<lightning:layoutItem >
+			<lightning:formattedText value="Location Ticket Information:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:formattedText value="Use the MR045 erport in Millennium to find the Total Number of New and Repeat Guests"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text1" label="Total Number of New Guests:"/>
+    	</lightning:layoutItem>
+    	<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text2" label="Total Number of Repeat Guests:"/>
+    	</lightning:layoutItem>
+    	<lightning:layoutItem >
+			<lightning:input class="formitem"  type="text" name="text3" label="Total Tickets:"/>
+		</lightning:layoutItem>
+    </div>
+    
+    <div style="margin-top:40px">
+		<lightning:layoutItem >
+			<lightning:formattedText value="Location Performance Information"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:formattedText value="Use the Monitoring Station to find the location's Pre-book percentage"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem >
+			<lightning:input class="formitem" type="number" name="num1" label="Pre-book%" formatter="percent"/>
+		</lightning:layoutItem>
+	
+        <div style="margin-top:40px">
+			<lightning:layoutItem>
+		 		<lightning:formattedText value="Use the MR080 to find the Total Dollar Amount in Packages and Products Sold"/>
+			</lightning:layoutItem>
+        </div>
+		<lightning:layoutItem >
+		 	<lightning:input class="formitem" type="number" name="num2" label="Total Dollar Amount in Package Sales"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem >
+    		<lightning:input class="formitem" type="number" name="num3" label="Total Dollar Amount in Product Sales"/>
+        </lightning:layoutItem> 
+    	<lightning:layoutItem >
+		 	<lightning:input class="formitem" type="number" name="num4" label="Total Dollar Amount in Package Sales/Per Ticket:"/>
+    	</lightning:layoutItem>
+    	<lightning:layoutItem >
+		 	<lightning:input class="formitem" type="number" name="num5" label="Total Dollar Amount in Product Sales/Per Ticket:"/>
+    	</lightning:layoutItem>
+    </div>
+	<div>
+			<div style="margin-top: 1%; color: #646464; font-size: 13px; font-weight: 600;">What is in your cash drawer at shift change?</div>
+        <table style="width: 75%;margin:auto;margin-top: 1%;" class="table-1">
+        	<tr style="margin:5px;">
+            	<td class="slds-text-align_right">Number of pennies :&nbsp;</td>
+                <td><ui:inputNumber aura:id="pennies-1" value="" change="{!c.penniesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="pennies-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of nickels :&nbsp;</td>
+                <td><ui:inputNumber aura:id="nickels-1" value="" change="{!c.nickelsToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="nickels-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of dimes :&nbsp;</td>
+                <td><ui:inputNumber aura:id="dimes-1" value="" change="{!c.dimesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="dimes-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of quarters :&nbsp;</td>
+                <td><ui:inputNumber aura:id="quarters-1" value="" change="{!c.quartersToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="quarters-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of ones :&nbsp;</td>
+                <td><ui:inputNumber aura:id="ones-1" value="" change="{!c.onesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="ones-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of fives :&nbsp;</td>
+                <td><ui:inputNumber aura:id="fives-1" value="" change="{!c.fivesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="fives-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of tens :&nbsp;</td>
+                <td><ui:inputNumber aura:id="tens-1" value="" change="{!c.tensToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="tens-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of twenties :&nbsp;</td>
+                <td><ui:inputNumber aura:id="twenties-1" value="" change="{!c.twentiesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="twenties-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of fifties :&nbsp;</td>
+                <td><ui:inputNumber aura:id="fifties-1" value="" change="{!c.fiftiesToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="fifties-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td class="slds-text-align_right">Number of hundreds :&nbsp;</td>
+                <td><ui:inputNumber aura:id="hundreds-1" value="" change="{!c.hundredsToDollers_1}"/></td>
+                <td class="slds-text-align_right">Total :&nbsp;$</td>
+                <td><ui:inputNumber aura:id="hundreds-dollers-1" value="0"/></td>
+            </tr>
+            <tr>
+            	<td colspan="3" class="slds-text-align_right">Total amount in your cash drawer:</td>
+                <td><ui:inputNumber aura:id="t-1" value="0"/></td>
+            </tr>
+        </table>
+		</div>
+	        <fieldset class="slds-form-element">
+            <legend class="slds-form-element__legend slds-form-element__label">Check one of the following:</legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio">
+                    <input type="radio" id="radio-1" name="options" value="on" onclick="{!c.tbFocus_1}"/>
+                    <label class="slds-radio__label" for="radio-1" onclick="{!c.tbFocus_1}">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is over by:</span>
+                    </label>
+                    <input type="text" id="tb-1"/>
+                </span>
+                <span class="slds-radio">
+                    <input type="radio" id="radio-2" name="options" value="" onclick="{!c.tbFocus_2}"/>
+                    <label class="slds-radio__label" for="radio-2" onclick="{!c.tbFocus_2}">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is short by:</span>
+                    </label>
+                    <input type="text" id="tb-2"/>
+                </span>
+                <span class="slds-radio">
+                    <input type="radio" id="radio-5" name="options" value="" />
+                    <label class="slds-radio__label" for="radio-5">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is perfect:</span>
+                    </label>
+                </span>
+            </div>
+        </fieldset> 
+    
+    	<lightning:layoutItem >
+			<lightning:textarea class="formitem" name="textarea1" label="Additional Notes:"/>
+		</lightning:layoutItem>
+    
+    	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+    </div>
+</aura:component>
