@@ -36,103 +36,69 @@
 
 	},
 	penniesToDollers_1 : function(component, event, helper) {
-		var pennies = parseInt(component.find('pennies-1').get('v.value'));
-        component.find('pennies-dollers-1').set('v.value',pennies*0.01);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'pennies-1','pennies-dollers-1',0.01,'t-1');
 	},
     nickelsToDollers_1 : function(component, event, helper) {
-		var nickels = parseInt(component.find('nickels-1').get('v.value'));
-        component.find('nickels-dollers-1').set('v.value',nickels*0.05);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'nickels-1','nickels-dollers-1',0.05,'t-1');
 	},
     dimesToDollers_1 : function(component, event, helper) {
-		var dimes = parseInt(component.find('dimes-1').get('v.value'));
-        component.find('dimes-dollers-1').set('v.value',dimes*0.1);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'dimes-1','dimes-dollers-1',0.1,'t-1');
 	},
     quartersToDollers_1 : function(component, event, helper) {
-		var quarters = parseInt(component.find('quarters-1').get('v.value'));
-        component.find('quarters-dollers-1').set('v.value',quarters*0.25);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'quarters-1','quarters-dollers-1',0.25,'t-1');
 	},
     onesToDollers_1 : function(component, event, helper) {
-		var ones = parseInt(component.find('ones-1').get('v.value'));
-        component.find('ones-dollers-1').set('v.value',ones*1);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'ones-1','ones-dollers-1',1,'t-1');
 	},
     fivesToDollers_1 : function(component, event, helper) {
-		var fives = parseInt(component.find('fives-1').get('v.value'));
-        component.find('fives-dollers-1').set('v.value',fives*5);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'fives-1','fives-dollers-1',1,'t-1');
 	},
     tensToDollers_1 : function(component, event, helper) {
-		var tens = parseInt(component.find('tens-1').get('v.value'));
-        component.find('tens-dollers-1').set('v.value',tens*10);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'tens-1','tens-dollers-1',10,'t-1');
 	},
     twentiesToDollers_1 : function(component, event, helper) {
-		var twenties = parseInt(component.find('twenties-1').get('v.value'));
-        component.find('twenties-dollers-1').set('v.value',twenties*20);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'twenties-1','twenties-dollers-1',20,'t-1');
 	},
     fiftiesToDollers_1 : function(component, event, helper) {
-		var fifties = parseInt(component.find('fifties-1').get('v.value'));
-        component.find('fifties-dollers-1').set('v.value',fifties*50);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'fifties-1','fifties-dollers-1',50,'t-1');
 	},
     hundredsToDollers_1 : function(component, event, helper) {
-		var hundreds = parseInt(component.find('hundreds-1').get('v.value'));
-        component.find('hundreds-dollers-1').set('v.value',hundreds*100);
-        helper.setTotal_1(component);
+        helper.updateTotal(component,'hundreds-1','hundreds-dollers-1',100,'t-1');
 	},
 	penniesToDollers_2 : function(component, event, helper) {
-		var pennies2 = parseInt(component.find('pennies-2').get('v.value'));
-        component.find('pennies-dollers-2').set('v.value',pennies2*0.01);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'pennies-2','pennies-dollers-2',0.01,'t-2');
 	},
     nickelsToDollers_2 : function(component, event, helper) {
-		var nickels2 = parseInt(component.find('nickels-2').get('v.value'));
-        component.find('nickels-dollers-2').set('v.value',nickels2*0.05);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'nickels-2','nickels-dollers-2',0.05,'t-2');
 	},
     dimesToDollers_2 : function(component, event, helper) {
-		var dimes2 = parseInt(component.find('dimes-2').get('v.value'));
-        component.find('dimes-dollers-2').set('v.value',dimes2*0.1);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'dimes-2','dimes-dollers-2',0.1,'t-2');
 	},
     quartersToDollers_2 : function(component, event, helper) {
-		var quarters2 = parseInt(component.find('quarters-2').get('v.value'));
-        component.find('quarters-dollers-2').set('v.value',quarters2*0.25);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'quarters-2','quarters-dollers-2',0.25,'t-2');
 	},
     onesToDollers_2 : function(component, event, helper) {
-		var ones2 = parseInt(component.find('ones-2').get('v.value'));
-        component.find('ones-dollers-2').set('v.value',ones2*1);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'ones-2','ones-dollers-2',1,'t-2');
 	},
     fivesToDollers_2 : function(component, event, helper) {
-		var fives2 = parseInt(component.find('fives-2').get('v.value'));
-        component.find('fives-dollers-2').set('v.value',fives2*5);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'fives-2','fives-dollers-2',5,'t-2');
 	},
     tensToDollers_2 : function(component, event, helper) {
-		var tens2 = parseInt(component.find('tens-2').get('v.value'));
-        component.find('tens-dollers-2').set('v.value',tens2*10);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'tens-2','tens-dollers-2',10,'t-2');
 	},
     twentiesToDollers_2 : function(component, event, helper) {
-		var twenties2 = parseInt(component.find('twenties-2').get('v.value'));
-        component.find('twenties-dollers-2').set('v.value',twenties2*20);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'twenties-2','twenties-dollers-2',20,'t-2');
 	},
     fiftiesToDollers_2 : function(component, event, helper) {
-		var fifties2 = parseInt(component.find('fifties-2').get('v.value'));
-        component.find('fifties-dollers-2').set('v.value',fifties2*50);
-        helper.setTotal_2(component);
+        helper.updateTotal(component,'fifties-2','fifties-dollers-2',50,'t-2');
 	},
     hundredsToDollers_2 : function(component, event, helper) {
-		var hundreds2 = parseInt(component.find('hundreds-2').get('v.value'));
-        component.find('hundreds-dollers-2').set('v.value',hundreds2*100);
-        helper.setTotal_2(component);
-	}
+        helper.updateTotal(component,'hundreds-2','hundreds-dollers-2',100,'t-2');
+	},
+    tbFocus_1 : function(component, event, helper) {
+        document.getElementById("tb-1").focus();
+    },
+    tbFocus_2 : function(component, event, helper) {
+        document.getElementById("tb-2").focus();
+    }
 })

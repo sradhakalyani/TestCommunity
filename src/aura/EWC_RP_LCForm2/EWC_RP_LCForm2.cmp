@@ -239,47 +239,34 @@
 		 	<lightning:input class="formitem" type="number" name="num7" label="Average Ticket:"/>
 		 </lightning:layoutItem>
     </div>
- <fieldset class="slds-form-element">
-  <legend class="slds-form-element__legend slds-form-element__label">Check one of the following</legend>
-  <div class="slds-form-element__control">
-    <span class="slds-radio">
-      <input type="radio" id="radio-1" name="options" value=""/>
-      <label class="slds-radio__label" for="radio-1">
-       	<span class="slds-radio_faux"></span>
-        <span class="slds-form-element__label">My Register is over by:</span>
-      </label>
-        <input type="text" name="radiotext1"/>
-	 </span>
-       
-    <span class="slds-radio">
-        <input type="radio" id="radio-2" name="options" value="" />
-      	<label class="slds-radio__label" for="radio-2">
-        	<span class="slds-radio_faux"></span>
-            <span class="slds-form-element__label">My Register is short by:</span>
-      	</label>
-        <input type="text" name="radiotext2"/>
-	</span>
-      
-	<span class="slds-radio">
-        <input type="radio" id="radio-3" name="options" value="" />
-      	<label class="slds-radio__label" for="radio-3">
-        	<span class="slds-radio_faux"></span>
-            <span class="slds-form-element__label">My Register is perfect:</span>
-      	</label>
-	</span>
-      
-  </div>
-</fieldset>
-		<lightning:layoutItem >
-    	   <lightning:radioGroup aura:id="mygroup"
-        		name="radioButtonGroup"
-        		label="Check one of the following"
-        		options="{!v.options}" 
-                onchange="{!c.handleChange}"
-                
-			/>
-    	</lightning:layoutItem>
-		<input aura:id="radiotext" type="text" name="radio-text2" />
+        <fieldset class="slds-form-element">
+            <legend class="slds-form-element__legend slds-form-element__label">Check one of the following:</legend>
+            <div class="slds-form-element__control">
+                <span class="slds-radio">
+                    <input type="radio" id="radio-1" name="options" value="on" onclick="{!c.tbFocus_1}"/>
+                    <label class="slds-radio__label" for="radio-1" onclick="{!c.tbFocus_1}">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is over by:</span>
+                    </label>
+                    <input type="text" id="tb-1"/>
+                </span>
+                <span class="slds-radio">
+                    <input type="radio" id="radio-2" name="options" value="" onclick="{!c.tbFocus_2}"/>
+                    <label class="slds-radio__label" for="radio-2" onclick="{!c.tbFocus_2}">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is short by:</span>
+                    </label>
+                    <input type="text" id="tb-2"/>
+                </span>
+                <span class="slds-radio">
+                    <input type="radio" id="radio-5" name="options" value="" />
+                    <label class="slds-radio__label" for="radio-5">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-form-element__label">My Register is perfect:</span>
+                    </label>
+                </span>
+            </div>
+        </fieldset> 
     
     	<lightning:layoutItem >
 			<lightning:textarea class="formitem" name="textarea1" label="Additional Notes:"/>
