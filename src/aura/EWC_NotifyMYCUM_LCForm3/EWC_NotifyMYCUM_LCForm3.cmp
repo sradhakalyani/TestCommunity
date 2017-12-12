@@ -1,0 +1,98 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global">
+	<div style="background: #f5f5f5;"> 
+        <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>Request to Adjust Designated Manager Schedule</b></div>
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name Submitting Form" value="Associate Name Submitting Form"/> 
+  		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+				<option value="">select one option</option>
+        			<option value="Home Phone">Home Phone</option>
+        			<option value="Mobile Phone">Mobile Phone</option>
+        			<option value="Work Phone">Work Phone</option>
+        			<option value="Email">Email</option>
+    			</lightning:select>
+    		</lightning:layoutItem>
+    		
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" aura:id="fieldID" name="select2" label="This form is being sent from:" required="true">
+        		<option value="">select the center</option>
+        		<option value="Center1">Center1</option>
+        		<option value="Center2">Center2</option>
+        		<option value="Center3">Center3</option>
+        		<option value="Center4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+		<div style="margin-top: 1%; font-size: 13px; font-weight: 600;">In the event that you need to change your schedule to accommodate a GSA Training, Wax Training or to cover a GSA shift you will need to submit this form. GSA shifts must be covered by the manager in the event the location is short staffed or a GSA calls out for a shift that needs coverage. Once this form is submitted, management will review your schedule and make the necessary adjustments.</div>
+
+	<div style="margin-top:40px">
+		<lightning:layoutItem>
+			<lightning:formattedText value="GSA/Waxer Training"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text1" label="Name of New Associate:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" name="select3" label="New Associate Position">
+        		<option value="">Choose One</option>
+        		<option value="GSA">GSA</option>
+        		<option value="Wax Associate">Wax Associate</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date1" label="1. Training Date:"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text2" label="Shift Requested:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date2" label="2. Training Date:"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text3" label="Shift Requested:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date3" label="3. Training Date:"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text4" label="Shift Requested:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date4" label="4. Training Date:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text5" label="Shift Requested:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date5" label="5. Training Date:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text6" label="Shift Requested:"/>
+		</lightning:layoutItem>
+	</div>
+	<div style="margin-top:40px">
+		<lightning:layoutItem>
+			<lightning:formattedText value="Covering a GSA Shift"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:input class="formitem"  type="date" name="date6" label="Date:"/>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text7" label="Shift Covering:"/>
+		</lightning:layoutItem>
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" name="select4" label="Reason for Schedule Adjustment">
+        		<option value="">Choose One</option>
+        		<option value="GSA Called Out">GSA Called Out</option>
+        		<option value="Short Staffed">Short Staffed</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+    	<lightning:layoutItem>
+			<lightning:input class="formitem"  type="text" name="text8" label="Comments"/>
+		</lightning:layoutItem>
+	</div>
+
+    	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+    </div>
+</aura:component>
