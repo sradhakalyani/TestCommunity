@@ -1,0 +1,42 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global">
+	<div style="background: #f5f5f5;"> 
+        <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>Pay Check Delivery Location Change</b></div>
+		<lightning:layoutItem>
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
+  		</lightning:layoutItem>
+		<lightning:layoutItem>
+			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
+				<option value="">select one option</option>
+        			<option value="Home Phone">Home Phone</option>
+        			<option value="Mobile Phone">Mobile Phone</option>
+        			<option value="Work Phone">Work Phone</option>
+        			<option value="Email">Email</option>
+    		</lightning:select>
+    	</lightning:layoutItem>
+    		
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" aura:id="fieldID" name="select2" label="This form is being sent from:" required="true">
+        		<option value="">select the center</option>
+        		<option value="Center1">Center1</option>
+        		<option value="Center2">Center2</option>
+        		<option value="Center3">Center3</option>
+        		<option value="Center4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+		
+		<lightning:layoutItem>
+    		<lightning:select class="formitem" name="select3" label="I hereby request my paycheck to be delivered regularly to the following location:">
+        		<option value="">select the center</option>
+        		<option value="Center1">Center1</option>
+        		<option value="Center2">Center2</option>
+        		<option value="Center3">Center3</option>
+        		<option value="Center4">Center4</option>
+    		</lightning:select>
+		</lightning:layoutItem>
+
+    	<div style="margin-top:40px;background: #e62626;color: white;padding: 1%;" align="center">
+    		<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
+			<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+		</div>
+    </div>
+</aura:component>
