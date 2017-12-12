@@ -91,8 +91,9 @@
 			<lightning:input class="formitem"  type="text" name="text8" label="Comments"/>
 		</lightning:layoutItem>
 	</div>
-
+    <div style="margin-top:40px">
     	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
 		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
+	</div>
     </div>
 </aura:component>
