@@ -2,7 +2,7 @@
 	<div style="background: #f5f5f5;"> 
         <div style="background: #e62626;color: white;padding: 1%;font-size: 18px;" align="center"><b>RSVP Form</b></div>
 		<lightning:layoutItem>
-			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name Submitting Form" value="Associate Name"/> 
+			<lightning:input class="formitem" type="text" name="Associate Name" label="Associate Name" value="Associate Name"/> 
   		</lightning:layoutItem>
 		<lightning:layoutItem>
 			<lightning:select class="formitem" aura:id="fieldID" name="select1" label="Best Way to Reach you" required="true">
