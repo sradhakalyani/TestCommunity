@@ -97,7 +97,7 @@
 		</lightning:layoutItem>
 	</div>
 
-    <div style="margin-top:40px" align="center">
+    <div style="margin-top:40px;background: #e62626;color: white;padding: 1%;" align="center">
     	<lightning:button class="formbutton" variant="neutral" label="SUBMIT" onclick="{!c.clickSubmit}"/>
 		<lightning:button class="formbutton" variant="neutral" label="CANCEL" onclick="{!c.redirect}"/>
 	</div>
